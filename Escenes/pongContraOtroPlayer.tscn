@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://iqcg0kqi6q0p"]
+
+[ext_resource type="Script" uid="uid://d8wmetu3wx3i" path="res://Escenes/pong_contra_otro_player.gd" id="1_562yf"]
+[ext_resource type="PackedScene" uid="uid://c3cvcep3j8a0q" path="res://Escenes/ball.tscn" id="1_bnwox"]
+[ext_resource type="Texture2D" uid="uid://pk7fk02k2wxe" path="res://Sprites/image3.png" id="1_enp6b"]
+[ext_resource type="PackedScene" uid="uid://c02746idd1xvs" path="res://Escenes/player1.tscn" id="2_0f23e"]
+[ext_resource type="PackedScene" uid="uid://fb0rjrhcihd6" path="res://Escenes/bot.tscn" id="3_0f23e"]
+[ext_resource type="Script" uid="uid://b0b8u81vegdpd" path="res://player_2.gd" id="5_llbpn"]
+[ext_resource type="AudioStream" uid="uid://r8rv4m0mxqq8" path="res://Sounds/carousel-circus-music-funny-fair-carnival-clown-297418.mp3" id="6_sm60a"]
+[ext_resource type="Texture2D" uid="uid://508j8kfvy8es" path="res://Sprites/image0.png" id="8_l8atv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enp6b"]
+size = Vector2(74.6156, 17.3799)
+
+[sub_resource type="LabelSettings" id="LabelSettings_llbpn"]
+font_size = 60
+font_color = Color(0.984314, 1, 1, 1)
+
+[node name="pongContraOtroPlayer" type="Node2D"]
+script = ExtResource("1_562yf")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 56.0
+offset_top = 586.0
+offset_right = 188.0
+offset_bottom = 691.0
+scale = Vector2(1.11627, 7.45757)
+
+[node name="WallPaperCircus" type="Sprite2D" parent="."]
+position = Vector2(704, 355)
+scale = Vector2(1.00187, 1.00187)
+texture = ExtResource("1_enp6b")
+
+[node name="Ball" parent="." instance=ExtResource("1_bnwox")]
+position = Vector2(660, 348)
+
+[node name="Player1" parent="." instance=ExtResource("2_0f23e")]
+position = Vector2(184, 352)
+safe_margin = 2.518
+
+[node name="Player2" parent="." instance=ExtResource("3_0f23e")]
+position = Vector2(1149, 341)
+script = ExtResource("5_llbpn")
+
+[node name="topWall" type="StaticBody2D" parent="."]
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="topWall"]
+position = Vector2(697.501, -4.61531)
+scale = Vector2(19.3927, -3.52307)
+shape = SubResource("RectangleShape2D_enp6b")
+
+[node name="b0ttomWall" type="StaticBody2D" parent="."]
+position = Vector2(9, 712)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="b0ttomWall"]
+position = Vector2(697, 7.38462)
+scale = Vector2(19.3927, -3.52307)
+shape = SubResource("RectangleShape2D_enp6b")
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2(42, 0)
+scale = Vector2(1, 7.6)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(-7.38464, 91.4474)
+rotation = 1.5708
+scale = Vector2(2.55168, -3.52307)
+shape = SubResource("RectangleShape2D_enp6b")
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2(91, 167)
+scale = Vector2(1, 7.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(1280.62, 695)
+rotation = 1.5708
+scale = Vector2(19.3927, -3.52307)
+shape = SubResource("RectangleShape2D_enp6b")
+
+[node name="Player1Score" type="Label" parent="."]
+offset_left = 476.0
+offset_top = 75.0
+offset_right = 516.0
+offset_bottom = 158.0
+text = "0"
+label_settings = SubResource("LabelSettings_llbpn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2Score" type="Label" parent="."]
+offset_left = 798.0
+offset_top = 75.0
+offset_right = 838.0
+offset_bottom = 158.0
+text = "0"
+label_settings = SubResource("LabelSettings_llbpn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_sm60a")
+autoplay = true
+
+[node name="Image0" type="Sprite2D" parent="."]
+position = Vector2(706, 364)
+texture = ExtResource("8_l8atv")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="body_entered" from="RightWall" to="." method="_on_right_wall_body_entered"]
+[connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]

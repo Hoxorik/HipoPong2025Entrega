@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://fb0rjrhcihd6"]
+
+[ext_resource type="Script" uid="uid://1c78e65dqsnr" path="res://Scripts/bot.gd" id="1_usf6e"]
+[ext_resource type="Texture2D" uid="uid://bwta51o6a8b8o" path="res://Sprites/image2.png" id="2_usf6e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_usf6e"]
+radius = 59.74
+height = 282.0
+
+[node name="bot" type="CharacterBody2D"]
+position = Vector2(1149, 340)
+scale = Vector2(0.485, 0.458)
+script = ExtResource("1_usf6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.12371, -2.18342)
+rotation = 0.0565884
+scale = Vector2(0.485, 0.458)
+texture = ExtResource("2_usf6e")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(6.18557, -19.6507)
+scale = Vector2(0.897361, 2.36838)
+shape = SubResource("CapsuleShape2D_usf6e")
